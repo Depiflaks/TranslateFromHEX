@@ -1,0 +1,125 @@
+command,code,operation
+"add d,r",000011rdddddrrrr,Rd←Rd+Rr
+"adc d,r",000111rdddddrrrr,Rd←Rd+Rr+C
+"adiw d,K",10010110KKddKKKK,Rdh:Rdl←Rdh:Rdl+K
+"sub d,r",000110rdddddrrrr,Rd←Rd-Rr
+"sbc d,r",000010rdddddrrrr,Rd←Rd-Rr-C
+"subi d,K",0101KKKKddddKKKK,Rd←Rd-K
+"sbci d,K",0100KKKKddddKKKK,Rd←Rd-K-C
+"sbiw d,K",10010111KKddKKKK,Rdh:Rdl←Rdh:Rdl-K
+"and d,r",001000rdddddrrrr,Rd←Rd AND Rr
+"andi d,K",0111KKKKddddKKKK,Rd←Rd AND K
+"or d,r",001010rdddddrrrr,Rd←Rd OR Rr
+"ori d,K",0110KKKKddddKKKK,Rd←Rd OR K
+"eor d,r",001001rdddddrrrr,Rd←Rd EOR Rr
+com d,1001010ddddd0000,Rd←0xFF-Rd
+neg d,1001010ddddd0001,Rd←0x00-Rd
+"sbr d,K",0110KKKKddddKKKK,Rd←Rd OR K
+"cbr d,K",0111KKKKddddKKKK,Rd←Rd AND (0xFF- K)
+inc d,1001010ddddd0011,Rd←Rd+1
+dec d,1001010ddddd1010,Rd←Rd-1
+tst d,001000dddddddddd,Rd←Rd AND Rd
+clr d,001001dddddddddd,Rd←Rd EOR Rd
+ser d,11101111dddd1111,Rd←0xFF
+"mov d,r",001011rdddddrrrr,Rd←Rr
+"movw d,r",00000001ddddrrrr,Rd+1:Rd←Rr+1:Rr
+"ldi d,K",1110KKKKddddKKKK,Rd←K
+ld d,1001000ddddd1100,Rd← (X)
+ld d,1001000ddddd1101,"Rd← (X), X←X+1"
+ld d,1001000ddddd1110,"X←X-1, Rd← (X)"
+ld d,1000000ddddd1000,Rd← (Y)
+ld d,1001000ddddd1001,"Rd← (Y), Y←Y+1"
+ld d,1001000ddddd1010,"Y←Y-1, Rd← (Y)"
+"ldd d,q",10q0qq0ddddd1qqq,Rd← (Y+q)
+ld d,1000000ddddd0000,Rd← (Z)
+ld d,1001000ddddd0001,"Rd← (Z), Z←Z+1"
+ld d,1001000ddddd0010,"Z←Z-1, Rd← (Z)"
+"ldd d,q",10q0qq0ddddd0qqq,Rd← (Z+q)
+"lds d,k",1001000ddddd0000kkkkkkkkkkkkkkkk,Rd← (k)
+st r,1001001rrrrr1100,(X) ←Rr
+st r,1001001rrrrr1101,"(X) ←Rr, X←X+1"
+st r,1001001rrrrr1110,"X←X-1, (X) ←Rr"
+st r,1000001rrrrr1000,(Y) ←Rr
+st r,1001001rrrrr1001,"(Y) ←Rr, Y←Y+1"
+st r,1001001rrrrr1010,"Y←Y-1, (Y) ←Rr"
+"std Y+q,r",10q0qq1rrrrr1qqq,(Y+q) ← Rr
+st r,1000001rrrrr0000,(Z) ←Rr
+st r,1001001rrrrr0001,"(Z) ←Rr, Z←Z+1"
+st r,1001001rrrrr0010,"Z←Z-1, (Z) ←Rr"
+"std q,r",10q0qq1rrrrr0qqq,(Z+q) ← Rr
+"sts k,r",1001001rrrrr0000kkkkkkkkkkkkkkkk,(k) ←Rr
+lpm,1001010111001000,R0← (Z)
+lpm d,1001000ddddd0100,Rd← (Z)
+lpm d,1001000ddddd0101,"Rd← (Z), Z←Z+1"
+spm,1001010111101000,(Z) ←R1:R0
+"in d,P",10110PPdddddPPPP,Rd←P
+"out P,r",10111PPrrrrrPPPP,P←Rr
+push r,1001001rrrrr1111,"STACK←Rr, SP←SP-1"
+pop d,1001000ddddd1111,"SP←SP+1, Rd←STACK"
+rjmp k,1100kkkkkkkkkkkk,PC←PC+k+1
+ijmp,1001010000001000,PC← (Z)
+jmp k,1001010kkkkk110kkkkkkkkkkkkkkkkk,PC←k
+rcall k,1101kkkkkkkkkkkk,"STACK←PC+1,PC←PC+k+1,SP←SP-2 or 3"
+icall,1001010100001000,"STACK←PC+1, PC← (Z),SP←SP-2 or 3"
+call k,1001010kkkkk111kkkkkkkkkkkkkkkkk,"STACK←PC+1, PC←k,SP←SP-2 or 3"
+ret,1001010100001000,"PC←STACK,"
+reti,1001010100011000,"PC←STACK,"
+"cpse d,r",000100rdddddrrrr,PC←PC+2 or 3
+"cp d,r",000101rdddddrrrr,Rd-Rr
+"cpc d,r",000001rdddddrrrr,Rd-Rr-C
+"cpi d,K",0011KKKKddddKKKK,Rd-Rr-K
+"sbrc r,b",1111110rrrrrobbb,PC←PC+2 or 3
+"sbrs r,b",1111111rrrrrobbb,PC←PC+2 or 3
+"sbic P,b",10011001PPPPPbbb,PC←PC+2 or 3
+"sbis P,b",10011011PPPPPbbb,PC←PC+2 or 3
+"brbc s,k",111101kkkkkkksss,PC←PC+k+1
+"brbs s,k",111100kkkkkkksss,PC←PC+k+1
+brcc k,111101kkkkkkk000,if (C=0) PC←PC+k+1
+brcs k,111100kkkkkkk000,if (C=1) PC←PC+k+1
+brsh k,111101kkkkkkk000,if (C=0) PC←PC+k+1
+brlo k,111100kkkkkkk000,if (C=1) PC←PC+k+1
+brne k,111101kkkkkkk001,if (Z=0) PC←PC+k+1
+breq k,111100kkkkkkk001,if (Z=1) PC←PC+k+1
+brpl k,111101kkkkkkk010,if (N=0) PC←PC+k+1
+brmi k,111100kkkkkkk010,if (N=1) PC←PC+k+1
+brvc k,111101kkkkkkk011,if (V=0) PC←PC+k+1
+brvs k,111100kkkkkkk011,if (V=1) PC←PC+k+1
+brge k,111101kkkkkkk100,if (S=0) PC←PC+k+1
+brlt k,111100kkkkkkk100,if (S=1) PC←PC+k+1
+brhc k,111101kkkkkkk101,if (H=0) PC←PC+k+1
+brhs k,111100kkkkkkk101,if (H=1) PC←PC+k+1
+brtc k,111101kkkkkkk110,if (T=0) PC←PC+k+1
+brts k,111100kkkkkkk110,if (T=1) PC←PC+k+1
+brid k,111101kkkkkkk111,if (T=0) PC←PC+k+1
+brie k,111100kkkkkkk111,if (T=1) PC←PC+k+1
+"sbi P,b",10011010PPPPPbbb,"I/O (P,b) ←1"
+"cbi P,b",10011000PPPPPbbb,"I/O (P,b) ←0"
+lsl d,000011dddddddddd,"Rd (n+1) ←Rd (n), Rd (0) ←0"
+lsr d,1001010ddddd0110,"Rd (n) ←Rd (n+1), Rd (7) ←0"
+rol d,000111dddddddddd,"Rd (0) ←C, Rd (n+1) ←Rd (n), C←Rd (7)"
+ror d,1001010ddddd0111,"Rd (7) ←C, Rd (n) ←Rd (n+1), C←Rd (0)"
+asr d,1001010ddddd0101,"Rd (n) ←Rd (n+1),"
+swap d,1001010ddddd0010,"Rd (3…0) ←Rd (7…4),Rd (7…4) ←Rd (3…0)"
+"bst r,b",1111101bbbbb0bbb,T←Rr (b)
+"bld d,b",1111100bbbbb0bbb,Rd (b) ←T
+bset s,100101000sss1000,SREG (s) ←1
+bclr s,100101001sss1000,SREG (s) ←0
+sec,1001010000001000,C←1
+clc,1001010010001000,C←0
+sez,1001010000011000,Z←1
+clz,1001010010011000,Z←0
+sen,1001010000101000,N←1
+cln,1001010010101000,N←0
+sev,1001010000111000,V←1
+clv,1001010010111000,V←0
+ses,1001010001001000,S←1
+cls,1001010011001000,S←0
+seh,1001010001011000,H←1
+clh,1001010011011000,H←0
+set,1001010001101000,T←1
+clt,1001010011101000,T←0
+sei,1001010001111000,I←1
+cli,1001010011111000,I←0
+nop,0000000000000000,—
+sleep,1001010110001000,—
+wdr,1001010110101000,—

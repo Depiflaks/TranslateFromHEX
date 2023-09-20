@@ -4,26 +4,26 @@ command,code,operation
 "adiw d,K",10010110KKddKKKK,Rdh:Rdl←Rdh:Rdl+K
 "sub d,r",000110rdddddrrrr,Rd←Rd-Rr
 "sbc d,r",000010rdddddrrrr,Rd←Rd-Rr-C
-"subi d,K",0101KKKKddddKKKK,Rd←Rd-K
-"sbci d,K",0100KKKKddddKKKK,Rd←Rd-K-C
+"subi d,K",0101KKKKddddKKKK,Rd←Rd-K Exc
+"sbci d,K",0100KKKKddddKKKK,Rd←Rd-K-C Exc
 "sbiw d,K",10010111KKddKKKK,Rdh:Rdl←Rdh:Rdl-K
 "and d,r",001000rdddddrrrr,Rd←Rd AND Rr
-"andi d,K",0111KKKKddddKKKK,Rd←Rd AND K
+"andi d,K",0111KKKKddddKKKK,Rd←Rd AND K Exc
 "or d,r",001010rdddddrrrr,Rd←Rd OR Rr
-"ori d,K",0110KKKKddddKKKK,Rd←Rd OR K
+"ori d,K",0110KKKKddddKKKK,Rd←Rd OR K Exc
 "eor d,r",001001rdddddrrrr,Rd←Rd EOR Rr
 com d,1001010ddddd0000,Rd←0xFF-Rd
 neg d,1001010ddddd0001,Rd←0x00-Rd
-"sbr d,K",0110KKKKddddKKKK,Rd←Rd OR K
-"cbr d,K",0111KKKKddddKKKK,Rd←Rd AND (0xFF- K)
+"sbr d,K",0110KKKKddddKKKK,Rd←Rd OR K Exc
+"cbr d,K",0111KKKKddddKKKK,Rd←Rd AND (0xFF- K)Exc
 inc d,1001010ddddd0011,Rd←Rd+1
 dec d,1001010ddddd1010,Rd←Rd-1
 tst d,001000dddddddddd,Rd←Rd AND Rd
 clr d,001001dddddddddd,Rd←Rd EOR Rd
-ser d,11101111dddd1111,Rd←0xFF
+ser d,11101111dddd1111,Rd←0xFF Exc
 "mov d,r",001011rdddddrrrr,Rd←Rr
 "movw d,r",00000001ddddrrrr,Rd+1:Rd←Rr+1:Rr
-"ldi d,K",1110KKKKddddKKKK,Rd←K
+"ldi d,K",1110KKKKddddKKKK,Rd←K Exc
 ld d,1001000ddddd1100,Rd← (X)
 ld d,1001000ddddd1101,"Rd← (X), X←X+1"
 ld d,1001000ddddd1110,"X←X-1, Rd← (X)"
@@ -35,7 +35,7 @@ ld d,1000000ddddd0000,Rd← (Z)
 ld d,1001000ddddd0001,"Rd← (Z), Z←Z+1"
 ld d,1001000ddddd0010,"Z←Z-1, Rd← (Z)"
 "ldd d,q",10q0qq0ddddd0qqq,Rd← (Z+q)
-"lds d,k",1001000ddddd0000kkkkkkkkkkkkkkkk,Rd← (k)
+"lds d,k",1001000ddddd0000kkkkkkkkkkkkkkkk,Rd← (k) Exc
 st r,1001001rrrrr1100,(X) ←Rr
 st r,1001001rrrrr1101,"(X) ←Rr, X←X+1"
 st r,1001001rrrrr1110,"X←X-1, (X) ←Rr"
@@ -67,7 +67,7 @@ reti,1001010100011000,"PC←STACK,"
 "cpse d,r",000100rdddddrrrr,PC←PC+2 or 3
 "cp d,r",000101rdddddrrrr,Rd-Rr
 "cpc d,r",000001rdddddrrrr,Rd-Rr-C
-"cpi d,K",0011KKKKddddKKKK,Rd-Rr-K
+"cpi d,K",0011KKKKddddKKKK,Rd-Rr-KExc
 "sbrc r,b",1111110rrrrrobbb,PC←PC+2 or 3
 "sbrs r,b",1111111rrrrrobbb,PC←PC+2 or 3
 "sbic P,b",10011001PPPPPbbb,PC←PC+2 or 3

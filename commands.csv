@@ -59,9 +59,9 @@ pop d,1001000ddddd1111,"SP←SP+1, Rd←STACK"
 rjmp k,1100kkkkkkkkkkkk,PC←PC+k+1
 ijmp,1001010000001000,PC← (Z)
 jmp k,1001010kkkkk110kkkkkkkkkkkkkkkkk,PC←k
-rcall k,1101kkkkkkkkkkkk,"STACK←PC+1,PC←PC+k+1,SP←SP-2 or 3"
-icall,1001010100001000,"STACK←PC+1, PC← (Z),SP←SP-2 or 3"
-call k,1001010kkkkk111kkkkkkkkkkkkkkkkk,"STACK←PC+1, PC←k,SP←SP-2 or 3"
+rcall k,1101kkkkkkkkkkkk,"PC←PC+k+1,SP←SP-2 or 3"
+icall,1001010100001000,"PC← (Z),SP←SP-2 or 3"
+call k,1001010kkkkk111kkkkkkkkkkkkkkkkk,"PC←k,SP←SP-2 or 3"
 ret,1001010100001000,"PC←STACK,"
 reti,1001010100011000,"PC←STACK,"
 "cpse d,r",000100rdddddrrrr,PC←PC+2 or 3

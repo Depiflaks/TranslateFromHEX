@@ -59,8 +59,11 @@ class Cmd():
         # если это команда по типу rjmp или rcall, то при необходимости делаем ревёрс строки
         if 'k' in self.description and self.description.count('PC') >= 2 and self.values['k'][0] == '1':
             add = '-'
+            new_asnt = ""
+            #print(self.values['k'])
             for i in range(len(self.values['k'])):
-                self.values['k'] = '0' if self.values['k'] == '1' else '1'
+                new_asnt += "1" if self.values['k'][i] == "0" else "0"
+            self.values['k'] = new_asnt
             self.values['k'] = bin(int(self.values['k'], 2) + 1)[2:]
         # если команда начинается с 16 регистра для записи
         if 'Exc' in self.description:
@@ -73,7 +76,7 @@ class Cmd():
     def translate_parameters(self):
         # переводим всё в 16-ичную сс
         for i in self.values.keys():
-            if i == "r" or i == "d":
+            if i == "r" or i == "d" or i == "P":
                 self.values[i] = str(int(self.values[i], 2))
                 continue
             if self.values[i][0] == '-':
@@ -109,11 +112,13 @@ if __name__ == "__main__":
     while ind < len(data):
         # выводим текущее количество байт
         print(hex((ind) * 2)[2:], end=":\t ")
-        cmd_list = list()
         # объявляем поиск новой программы
         cmd = Cmd()
+        cmd_list.append(cmd)
         cmd.get_parameters()
         # выводим значение команды
         print(cmd)
         # переходим к следующей команде
         ind += 1
+
+print(cmd_list[-4].hex_code, cmd_list[-4].code, cmd_list[-4].values)

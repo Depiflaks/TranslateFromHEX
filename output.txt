@@ -1,0 +1,56 @@
+0:	 0C 94 34 00      jmp	k=68	
+4:	 0C 94 3E 00      jmp	k=7c	
+8:	 0C 94 3E 00      jmp	k=7c	
+c:	 0C 94 3E 00      jmp	k=7c	
+10:	 0C 94 3E 00      jmp	k=7c	
+14:	 0C 94 3E 00      jmp	k=7c	
+18:	 0C 94 3E 00      jmp	k=7c	
+1c:	 0C 94 3E 00      jmp	k=7c	
+20:	 0C 94 3E 00      jmp	k=7c	
+24:	 0C 94 3E 00      jmp	k=7c	
+28:	 0C 94 3E 00      jmp	k=7c	
+2c:	 0C 94 3E 00      jmp	k=7c	
+30:	 0C 94 3E 00      jmp	k=7c	
+34:	 0C 94 3E 00      jmp	k=7c	
+38:	 0C 94 3E 00      jmp	k=7c	
+3c:	 0C 94 3E 00      jmp	k=7c	
+40:	 0C 94 3E 00      jmp	k=7c	
+44:	 0C 94 3E 00      jmp	k=7c	
+48:	 0C 94 3E 00      jmp	k=7c	
+4c:	 0C 94 3E 00      jmp	k=7c	
+50:	 0C 94 3E 00      jmp	k=7c	
+54:	 0C 94 3E 00      jmp	k=7c	
+58:	 0C 94 3E 00      jmp	k=7c	
+5c:	 0C 94 3E 00      jmp	k=7c	
+60:	 0C 94 3E 00      jmp	k=7c	
+64:	 0C 94 3E 00      jmp	k=7c	
+68:	 11 24            eor	d=1	r=1	
+6a:	 1F BE            out	P=63	r=1	
+6c:	 CF EF            ser	d=28	
+6e:	 D8 E0            ldi	d=29	K=8	
+70:	 DE BF            out	P=62	r=29	
+72:	 CD BF            out	P=61	r=28	
+74:	 0E 94 40 00      call	k=80	
+78:	 0C 94 52 00      jmp	k=a4	
+7c:	 0C 94 00 00      jmp	k=0	
+80:	 3D 9A            sbi	P=7	b=5	
+82:	 81 E0            ldi	d=24	K=1	
+84:	 91 E0            ldi	d=25	K=1	
+86:	 89 27            eor	d=24	r=25	
+88:	 11 F0            brbs	s=1	k=4	
+8a:	 45 9A            sbi	P=8	b=5	
+8c:	 01 C0            rjmp	k=2	
+8e:	 45 98            cbi	P=8	b=5	
+90:	 2F EF            ser	d=18	
+92:	 35 EA            ldi	d=19	K=a5	
+94:	 4E E0            ldi	d=20	K=e	
+96:	 21 50            subi	d=18	K=1	
+98:	 30 40            sbci	d=19	K=0	
+9a:	 40 40            sbci	d=20	K=0	
+9c:	 E1 F7            brbc	s=1	k=-8	
+9e:	 00 C0            rjmp	k=0	
+a0:	 00 00            nop	
+a2:	 F1 CF            rjmp	k=-1e	
+a4:	 F8 94            bclr	s=7	
+a6:	 FF CF            rjmp	k=-2	
+a8:	 3E FF            sbrs	r=19	b=6	

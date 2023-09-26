@@ -108,17 +108,18 @@ def find_command(code):
 
 
 if __name__ == "__main__":
+    out = open('output.txt', mode='w')
     cmd_list = list() # список всех команд
     while ind < len(data):
         # выводим текущее количество байт
-        print(hex((ind) * 2)[2:], end=":\t ")
+        out.write(hex((ind) * 2)[2:] + ":\t ")
         # объявляем поиск новой программы
         cmd = Cmd()
         cmd_list.append(cmd)
         cmd.get_parameters()
         # выводим значение команды
-        print(cmd)
+        out.write(str(cmd) + "\n")
         # переходим к следующей команде
         ind += 1
 
-print(cmd_list[-4].hex_code, cmd_list[-4].code, cmd_list[-4].values)
+#print(cmd_list[-4].hex_code, cmd_list[-4].code, cmd_list[-4].values)
